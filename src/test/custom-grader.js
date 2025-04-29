@@ -73,7 +73,7 @@ function writeOutputFiles(result, fileType) {
         xml: "./yaksha-test-cases.xml"
     };
 
-    let resultStatus = result.status === 'Pass' ? 'PASS' : 'FAIL';
+    let resultStatus = result.status === 'Passed' ? 'PASS' : 'FAIL';
     let output = `${result.methodName}=${resultStatus}\n`;
 
     let outputFilePath = outputFiles[fileType];
@@ -84,7 +84,7 @@ function writeOutputFiles(result, fileType) {
 
 // Function to check if if/else statements are used
 function checkIfElseUsage(ast) {
-    let result = 'Pass';
+    let result = 'Passed';
     let feedback = [];
     let ifElseUsed = false;
 
@@ -95,7 +95,7 @@ function checkIfElseUsage(ast) {
     });
 
     if (!ifElseUsed) {
-        result = 'Fail';
+        result = 'Failed';
         feedback.push("You must use an if/else statement to control the flow.");
     }
 
@@ -106,7 +106,7 @@ function checkIfElseUsage(ast) {
         'IfElseUsage',
         'functional',
         1,
-        result === 'Pass' ? 1 : 0,
+        result === 'Passed' ? 1 : 0,
         result,
         true,
         feedback.join(', ')
@@ -115,7 +115,7 @@ function checkIfElseUsage(ast) {
 
 // Function to check if comparison operators are used
 function checkComparisonOperators(ast) {
-    let result = 'Pass';
+    let result = 'Passed';
     let feedback = [];
     let comparisonOperatorsUsed = { equal: false, greaterThan: false, lessThan: false, strictEqual: false };
 
@@ -138,7 +138,7 @@ function checkComparisonOperators(ast) {
 
     for (let operator in comparisonOperatorsUsed) {
         if (!comparisonOperatorsUsed[operator]) {
-            result = 'Fail';
+            result = 'Failed';
             feedback.push(`You must use the '${operator}' comparison operator.`);
         }
     }
@@ -150,7 +150,7 @@ function checkComparisonOperators(ast) {
         'ComparisonOperators',
         'functional',
         1,
-        result === 'Pass' ? 1 : 0,
+        result === 'Passed' ? 1 : 0,
         result,
         true,
         feedback.join(', ')
@@ -159,7 +159,7 @@ function checkComparisonOperators(ast) {
 
 // Function to check if else if is used correctly
 function checkElseIfUsage(ast) {
-    let result = 'Pass';
+    let result = 'Passed';
     let feedback = [];
     let elseIfUsed = false;
 
@@ -170,7 +170,7 @@ function checkElseIfUsage(ast) {
     });
 
     if (!elseIfUsed) {
-        result = 'Fail';
+        result = 'Failed';
         feedback.push("You must use an else if statement for multiple conditions.");
     }
 
@@ -181,7 +181,7 @@ function checkElseIfUsage(ast) {
         'ElseIfUsage',
         'functional',
         1,
-        result === 'Pass' ? 1 : 0,
+        result === 'Passed' ? 1 : 0,
         result,
         true,
         feedback.join(', ')
@@ -227,7 +227,7 @@ function gradeAssignment() {
         console.log(resultsToSend);
 
         // Log the test result in yellow for pass and red for fail using ANSI codes
-        if (testCaseResult.status === 'Pass') {
+        if (testCaseResult.status === 'Passed') {
             console.log(`\x1b[33m${testCaseResult.methodName}: Pass\x1b[0m`); // Yellow for pass
         } else {
             console.log(`\x1b[31m${testCaseResult.methodName}: Fail\x1b[0m`); // Red for fail
